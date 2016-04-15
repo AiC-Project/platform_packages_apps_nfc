@@ -518,7 +518,7 @@ public class NativeNfcTag implements TagEndpoint {
             extras.putInt(Ndef.EXTRA_NDEF_MAXLENGTH, maxLength);
             extras.putInt(Ndef.EXTRA_NDEF_CARDSTATE, cardState);
             extras.putInt(Ndef.EXTRA_NDEF_TYPE, getNdefType(libnfcType, javaType));
-
+/*MOCKAIC*/mTechExtras = null;
             if (mTechExtras == null) {
                 // This will build the tech extra's for the first time,
                 // including a NULL ref for the NDEF tech we generated above.

@@ -184,7 +184,7 @@ void nativeNfcTag_doReadCompleted (tNFA_STATUS status)
     ALOGD ("%s: status=0x%X; is reading=%u", __FUNCTION__, status, sIsReadingNdefMessage);
 
     if (sIsReadingNdefMessage == false)
-        return; //not reading NDEF message right now, so just return
+    /*MOCKAIC*/ // return; //not reading NDEF message right now, so just return
 
     if (status != NFA_STATUS_OK)
     {
@@ -789,7 +789,7 @@ void nativeNfcTag_doTransceiveStatus (uint8_t* buf, uint32_t bufLen)
     SyncEventGuard g (sTransceiveEvent);
     ALOGD ("%s: data len=%d, waiting for transceive: %d", __FUNCTION__, bufLen, sWaitingForTransceive);
     if (!sWaitingForTransceive)
-        return;
+        /*MOCKAIC*/ //return;
 
     sTransceiveDataLen = 0;
     if (bufLen)
@@ -1027,16 +1027,17 @@ void nativeNfcTag_doCheckNdefResult (tNFA_STATUS status, uint32_t maxSize, uint3
     //#define RW_NDEF_FL_UNKNOWN    0x08    /* Unable to find if tag is ndef capable/formated/read only */
     //#define RW_NDEF_FL_FORMATABLE 0x10    /* Tag supports format operation */
 
-    if (status == NFC_STATUS_BUSY)
-    {
-        ALOGE ("%s: stack is busy", __FUNCTION__);
-        return;
-    }
+   /*MOCKAIC*/ //     if (status == NFC_STATUS_BUSY)
+   /*MOCKAIC*/ //     {
+   /*MOCKAIC*/ //         ALOGE ("%s: stack is busy", __FUNCTION__);
+   /*MOCKAIC*/ //         return;
+   /*MOCKAIC*/ //     }
+
 
     if (!sCheckNdefWaitingForComplete)
     {
         ALOGE ("%s: not waiting", __FUNCTION__);
-        return;
+        /*MOCKAIC*/ // return;
     }
 
     if (flags & RW_NDEF_FL_READ_ONLY)
@@ -1057,7 +1058,7 @@ void nativeNfcTag_doCheckNdefResult (tNFA_STATUS status, uint32_t maxSize, uint3
     {
         //NDEF content is on the tag
         sCheckNdefMaxSize = maxSize;
-        sCheckNdefCurrentSize = currentSize;
+        /*MOCKAIC*/ sCheckNdefCurrentSize = 20;//currentSize;
         sCheckNdefCardReadOnly = flags & RW_NDEF_FL_READ_ONLY;
         sCheckNdefCapable = true;
     }
@@ -1098,7 +1099,7 @@ void nativeNfcTag_doCheckNdefResult (tNFA_STATUS status, uint32_t maxSize, uint3
 *******************************************************************************/
 static jint nativeNfcTag_doCheckNdef (JNIEnv* e, jobject, jintArray ndefInfo)
 {
-    tNFA_STATUS status = NFA_STATUS_FAILED;
+    /*MOCKAIC*/tNFA_STATUS status = NFA_STATUS_OK;
     jint* ndef = NULL;
 
     ALOGD ("%s: enter", __FUNCTION__);

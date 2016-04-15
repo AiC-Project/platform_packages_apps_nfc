@@ -337,7 +337,7 @@ static void nfaConnectionCallback (UINT8 connEvent, tNFA_CONN_EVT_DATA* eventDat
             // For the SE, consider the field to be on while p2p is active.
             SecureElement::getInstance().notifyRfFieldEvent (true);
         }
-        else if (pn544InteropIsBusy() == false)
+        else /*MOCKAIC*//*if (pn544InteropIsBusy() == false)*/
         {
             NfcTag::getInstance().connectionEventHandler (connEvent, eventData);
 
@@ -868,7 +868,7 @@ static jboolean nfcManager_doInitialize (JNIEnv* e, jobject o)
             if (sIsNfaEnabled)
             {
                 SecureElement::getInstance().initialize (getNative(e, o));
-                RoutingManager::getInstance().initialize(getNative(e, o));
+                /*MOCKAIC*/ //RoutingManager::getInstance().initialize(getNative(e, o));
                 nativeNfcTag_registerNdefTypeHandler ();
                 NfcTag::getInstance().initialize (getNative(e, o));
                 PeerToPeer::getInstance().initialize ();
@@ -897,7 +897,7 @@ static jboolean nfcManager_doInitialize (JNIEnv* e, jobject o)
                 NFA_SetRfDiscoveryDuration(nat->discovery_duration);
 
                 // Do custom NFCA startup configuration.
-                doStartupConfig();
+                /*MOCKAIC*/ //doStartupConfig();
                 goto TheEnd;
             }
         }
@@ -911,7 +911,7 @@ static jboolean nfcManager_doInitialize (JNIEnv* e, jobject o)
     }
 
 TheEnd:
-    if (sIsNfaEnabled)
+    /*MOCKAIC*/ //if (sIsNfaEnabled)
         PowerSwitch::getInstance ().setLevel (PowerSwitch::LOW_POWER);
     ALOGD ("%s: exit", __FUNCTION__);
     return sIsNfaEnabled ? JNI_TRUE : JNI_FALSE;

@@ -1293,6 +1293,7 @@ bool NfcTag::isNdefDetectionTimedOut ()
 void NfcTag::connectionEventHandler (UINT8 event, tNFA_CONN_EVT_DATA* data)
 {
     static const char fn [] = "NfcTag::connectionEventHandler";
+            /*MOCKAIC*/bool isNack = false;
 
     switch (event)
     {
@@ -1309,12 +1310,13 @@ void NfcTag::connectionEventHandler (UINT8 event, tNFA_CONN_EVT_DATA* data)
     case NFA_ACTIVATED_EVT:
         // Only do tag detection if we are polling and it is not 'EE Direct RF' activation
         // (which may happen when we are activated as a tag).
-        if (data->activated.activate_ntf.rf_tech_param.mode < NCI_DISCOVERY_TYPE_LISTEN_A
-            && data->activated.activate_ntf.intf_param.type != NFC_INTERFACE_EE_DIRECT_RF)
+
+        /*MOCKAIC*/ //if (data->activated.activate_ntf.rf_tech_param.mode < NCI_DISCOVERY_TYPE_LISTEN_A
+        /*MOCKAIC*/ //    && data->activated.activate_ntf.intf_param.type != NFC_INTERFACE_EE_DIRECT_RF)
         {
             tNFA_ACTIVATED& activated = data->activated;
-            if (IsSameKovio(activated))
-                break;
+            /*MOCKAIC*/ /*if (IsSameKovio(activated))
+                            break;*/
             mIsActivated = true;
             mProtocol = activated.activate_ntf.protocol;
             calculateT1tMaxMessageSize (activated);
